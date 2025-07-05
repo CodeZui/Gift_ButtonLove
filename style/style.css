@@ -1,42 +1,168 @@
-body, html {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pacifico', cursive;
+}
+
+html, body {
+  height: 100%;
   overflow: hidden;
-  background-color: black;
 }
 
-#canvas {
-  display: block;
+body {
+  background-image: url('./background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: 'Pacifico', cursive;
 }
 
-#bear {
-  position: absolute;
-  left: 10px;
-  bottom: 50px;
-  width: 110px;
+.key-button {
+  width: 20vw;
+  max-width: 120px;
+  height: 20vw;
+  max-height: 120px;
+  min-width: 80px;
+  min-height: 80px;
+  background: linear-gradient(to bottom, #fefefe, #dcdcdc);
+  border: 4px solid #c0c0c0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
   z-index: 10;
-  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
-#bear:hover {
-  width: 112px;
-  transform: scale(1.2);
+.key-button:hover {
+  transform: scale(1.1);
+}
+
+.key-button:active {
+  transform: translateY(5px);
+}
+
+.key-button span {
+  font-size: 6vw;
+  font-size: 50px;
+  color: #e91e63;
+  user-select: none;
+}
+
+.message {
+  position: absolute;
+  /* font-size: 1vw; */
+  color: #ff4081;
+  font-weight: bold;
+  background-color: #fff0f6;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  border: 2px solid #ff4081;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  animation: fly 3s forwards;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+@keyframes fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(1.2);
+  }
+}
+
+.floating-cloud-1, .floating-cloud-2, .floating-cloud-3 {
+  position: absolute;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.floating-cloud-1 {
+  top: 10%;
+  left: -250px;
+  width: 20vw;
+  animation: floatCloud1 25s linear infinite;
+}
+
+.floating-cloud-2 {
+  top: 20%;
+  right: -300px;
+  width: 30vw;
+  animation: floatCloud2 35s linear infinite;
+  z-index: 2;
+}
+
+.floating-cloud-3 {
+  top: 40%;
+  left: -400px;
+  width: 25vw;
+  animation: floatCloud3 45s linear infinite;
+}
+
+@keyframes floatCloud1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(110vw); }
+}
+
+@keyframes floatCloud2 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120vw); }
+}
+
+@keyframes floatCloud3 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(115vw); }
+}
+
+.Nyan-Cat {
+  position: absolute;
+  bottom: 15%;
+  left: -200px;
+  width: 25vw;
+  max-width: 180px;
+  animation: Nyan-Cat 20s linear infinite;
+  z-index: 1;
+}
+
+.Nyan-Cat:hover{
   cursor: pointer;
 }
 
-#rotateNotice .overlay {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(10, 0, 30, 0.95);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  text-align: center;
-  padding: 20px;
+@keyframes Nyan-Cat {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(130vw); }
+}
+
+@media (max-width: 768px) {
+  .message {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .key-button {
+    width: 18vw;
+    height: 18vw;
+  }
+
+  .key-button span {
+    font-size: 7vw;
+  }
+
+  .message {
+    font-size: 5.5vw;
+  }
 }
