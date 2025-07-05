@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Nút bấm tình yêu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Pacifico', cursive;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background-image: url('style/background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .key-button {
+      width: 20vw;
+      max-width: 120px;
+      height: 20vw;
+      max-height: 120px;
+      min-width: 80px;
+      min-height: 80px;
+      background: linear-gradient(to bottom, #fefefe, #dcdcdc);
+      border: 4px solid #c0c0c0;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      z-index: 10;
+    }
+
+    .key-button:hover {
+      transform: scale(1.1);
+    }
+
+    .key-button:active {
+      transform: translateY(5px);
+    }
+
+    .key-button span {
+      font-size: 6vw;
+      font-size: 50px;
+      color: #e91e63;
+      user-select: none;
+    }
+
+    .message {
+      position: absolute;
+      font-size: 1vw;
+      color: #ff4081;
+      font-weight: bold;
+      background-color: #fff0f6;
+      padding: 0.5em 1em;
+      border-radius: 10px;
+      border: 2px solid #ff4081;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      pointer-events: none;
+      opacity: 0;
+      animation: fly 3s forwards;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+
+    @keyframes fly {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(1.2);
+      }
+    }
+
+    .floating-cloud-1, .floating-cloud-2, .floating-cloud-3 {
+      position: absolute;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .floating-cloud-1 {
+      top: 10%;
+      left: -250px;
+      width: 20vw;
+      animation: floatCloud1 25s linear infinite;
+    }
+
+    .floating-cloud-2 {
+      top: 20%;
+      right: -300px;
+      width: 30vw;
+      animation: floatCloud2 35s linear infinite;
+      z-index: 2;
+    }
+
+    .floating-cloud-3 {
+      top: 40%;
+      left: -400px;
+      width: 25vw;
+      animation: floatCloud3 45s linear infinite;
+    }
+
+    @keyframes floatCloud1 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(110vw); }
+    }
+
+    @keyframes floatCloud2 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-120vw); }
+    }
+
+    @keyframes floatCloud3 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(115vw); }
+    }
+
+    .Nyan-Cat {
+      position: absolute;
+      bottom: 15%;
+      left: -200px;
+      width: 25vw;
+      max-width: 180px;
+      animation: Nyan-Cat 20s linear infinite;
+      z-index: 1;
+    }
+
+    .Nyan-Cat:hover{
+      cursor: pointer;
+    }
+
+    @keyframes Nyan-Cat {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(130vw); }
+    }
+
+    @media (max-width: 768px) {
+      .message {
+        font-size: 3vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .key-button {
+        width: 18vw;
+        height: 18vw;
+      }
+
+      .key-button span {
+        font-size: 7vw;
+      }
+
+      .message {
+        font-size: 4.5vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://i.pinimg.com/originals/ed/35/f8/ed35f861be81be2548e514085fb19385.gif" class="Nyan-Cat" id="nyan-cat" alt="Nyan Cat">
+  <img src="./style/cloud.png" alt="Cloud 1" class="floating-cloud-1">
+  <img src="./style/cloud.png" alt="Cloud 2" class="floating-cloud-2">
+  <img src="./style/cloud.png" alt="Cloud 3" class="floating-cloud-3">
+
+  <div class="key-button" onclick="showRandomMessage(event)">
+    <span>❤️</span>
+  </div>
+  <audio id="popsound">
+    <source src="./style/pop.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="meosound">
+    <source src="./style/meow.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const sound = document.getElementById('popsound');
+    const nyanCat = document.getElementById('nyan-cat');
+    const meow = document.getElementById('meosound');
+    
+    nyanCat.addEventListener('click', () => {
+      meow.play();
+    });
+
+    nyanCat.addEventListener('touchstart', () => {
+      meow.play();
+    });
+
+    const messages = [
+      "Anh yêu em 💕", "Anh thương em 🤗", "I Love You 🥰", "Em thật xinh đẹp",
+      "Hạnh phúc nhé 💫", "❤️ Gửi yêu thương ❤️", "Luôn mỉm cười nhé 😊",
+      "Love You 3000 💖", "Cảm ơn vì tất cả 🌸",
+      "Em là một món quà 🎁", "Trái tim này là của em 💘",
+      "Em làm thế giới này đẹp hơn 💐", "Love You In Every Universe",
+      "Em là duy nhất 💞", "Saranghaeyo❤️",
+      "Anh nhớ em nhiều 🌈", "You Are My Everything 🫶",
+      "Yêu em không cần lý do 🏡", "Em là lý do anh luôn mỉm cười 😘",
+      "Anh yêu em vì em là chính em ✨"
+    ];
+
+    function showRandomMessage(event) {
+      sound.play();
+      const msg = document.createElement("div");
+      msg.className = "message";
+      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+      const directions = [0, Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4];
+      const angle = directions[Math.floor(Math.random() * directions.length)];
+      const distance = 200;
+      const dx = Math.cos(angle) * distance + "px";
+      const dy = Math.sin(angle) * distance + "px";
+      msg.style.setProperty('--dx', dx);
+      msg.style.setProperty('--dy', dy);
+
+      const rect = event.currentTarget.getBoundingClientRect();
+      msg.style.left = rect.left + rect.width / 2 + "px";
+      msg.style.top = rect.top + rect.height / 2 + "px";
+      msg.style.transform = "translate(-50%, -50%)";
+      msg.style.position = "fixed";
+
+      document.body.appendChild(msg);
+
+      setTimeout(() => msg.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
